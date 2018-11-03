@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IngresoDetalleRepository")
@@ -15,16 +16,6 @@ class IngresoDetalle
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_ingreso;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_articulo;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -66,33 +57,33 @@ class IngresoDetalle
      */
     private $precio_venta_publico;
 
+    /**
+     * Many IngresoDetalles have One Articulo.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Articulo", inversedBy="ingresoDetalles")
+     * @ORM\JoinColumn(name="articulo_id", referencedColumnName="id")
+     */
+    private $articulo;
+
+    /**
+     * Many IngresoDetalles have One Ingreso.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ingreso", inversedBy="ingresoDetalles")
+     * @ORM\JoinColumn(name="ingreso_id", referencedColumnName="id")
+     */
+    private $ingreso;
+
+    /**
+     * One IngresoDetalle has Many pedidoDetalles.
+     * @ORM\OneToMany(targetEntity="App\Entity\PedidoDetalle", mappedBy="ingresoDetalle")
+     */
+    private $pedidoDetalles;
+
+    public function __construct() {
+        $this->pedidoDetalles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdIngreso(): ?int
-    {
-        return $this->id_ingreso;
-    }
-
-    public function setIdIngreso(int $id_ingreso): self
-    {
-        $this->id_ingreso = $id_ingreso;
-
-        return $this;
-    }
-
-    public function getIdArticulo(): ?int
-    {
-        return $this->id_articulo;
-    }
-
-    public function setIdArticulo(int $id_articulo): self
-    {
-        $this->id_articulo = $id_articulo;
-
-        return $this;
     }
 
     public function getCodigo(): ?string
@@ -189,5 +180,37 @@ class IngresoDetalle
         $this->precio_venta_publico = $precio_venta_publico;
 
         return $this;
+    }
+
+    public function getIngreso(): ?ingreso
+    {
+        return $this->ingreso;
+    }
+
+    public function setIngreso(?Ingreso $ingreso): self
+    {
+        $this->ingreso = $ingreso;
+
+        return $this;
+    }
+
+    public function getArticulo(): ?articulo
+    {
+        return $this->articulo;
+    }
+
+    public function setArticulo(?Articulo $articulo): self
+    {
+        $this->articulo = $articulo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PedidoDetalles[]
+     */
+    public function getPedidoDetalles(): Collection
+    {
+        return $this->pedidoDetalles;
     }
 }

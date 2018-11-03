@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticuloRepository")
@@ -15,16 +16,6 @@ class Articulo
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_categoria;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $id_unidad;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -46,33 +37,33 @@ class Articulo
      */
     private $estado;
 
+    /**
+     * Many Articulos have One Categoria.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categoria", inversedBy="articulos")
+     * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     */
+    private $categoria;
+
+    /**
+     * Many Articulos have One UnidadMedida.
+     * @ORM\ManyToOne(targetEntity="App\Entity\UnidadMedida", inversedBy="articulos")
+     * @ORM\JoinColumn(name="unidad_medida_id", referencedColumnName="id")
+     */
+    private $unidadMedida;
+
+    /**
+     * One Articulo has Many ingresoDetalles.
+     * @ORM\OneToMany(targetEntity="App\Entity\IngresoDetalle", mappedBy="articulo")
+     */
+    private $ingresoDetalles;
+
+    public function __construct() {
+        $this->ingresoDetalles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCategoria(): ?int
-    {
-        return $this->id_categoria;
-    }
-
-    public function setIdCategoria(int $id_categoria): self
-    {
-        $this->id_categoria = $id_categoria;
-
-        return $this;
-    }
-
-    public function getIdUnidad(): ?int
-    {
-        return $this->id_unidad;
-    }
-
-    public function setIdUnidad(?int $id_unidad): self
-    {
-        $this->id_unidad = $id_unidad;
-
-        return $this;
     }
 
     public function getNombre(): ?string
@@ -121,5 +112,37 @@ class Articulo
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function getCategoria(): ?categoria
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(?Categoria $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function getUnidadMedida(): ?unidadMedida
+    {
+        return $this->unidadMedida;
+    }
+
+    public function setUnidadMedida(?UnidadMedida $unidadMedida): self
+    {
+        $this->unidadMedida = $unidadMedida;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IngresoDetalles[]
+     */
+    public function getIngresoDetalles(): Collection
+    {
+        return $this->ingresoDetalles;
     }
 }

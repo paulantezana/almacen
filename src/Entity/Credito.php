@@ -17,11 +17,6 @@ class Credito
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_venta;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $fecha_pago;
@@ -31,23 +26,18 @@ class Credito
      */
     private $total_pago;
 
+    /**
+     * Many Creditos have One Venta.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Venta", inversedBy="creditos")
+     * @ORM\JoinColumn(name="venta_id", referencedColumnName="id")
+     */
+    private $venta;
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getIdVenta(): ?int
-    {
-        return $this->id_venta;
-    }
-
-    public function setIdVenta(int $id_venta): self
-    {
-        $this->id_venta = $id_venta;
-
-        return $this;
-    }
-
+    
     public function getFechaPago(): ?\DateTimeInterface
     {
         return $this->fecha_pago;
@@ -68,6 +58,18 @@ class Credito
     public function setTotalPago($total_pago): self
     {
         $this->total_pago = $total_pago;
+
+        return $this;
+    }
+
+    public function getVenta(): ?venta
+    {
+        return $this->venta;
+    }
+
+    public function setVenta(?Venta $venta): self
+    {
+        $this->venta = $venta;
 
         return $this;
     }

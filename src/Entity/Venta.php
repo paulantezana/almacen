@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VentaRepository")
@@ -15,16 +16,6 @@ class Venta
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_pedido;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_usuario;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -66,33 +57,42 @@ class Venta
      */
     private $estado;
 
+
+    /**
+     * Many Ventas have One Usuario.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="ventas")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
+
+    
+    /**
+     * Many Ventas have One Pedido.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pedido", inversedBy="ventas")
+     * @ORM\JoinColumn(name="pedido_id", referencedColumnName="id")
+     */
+    private $pedido;
+
+    /**
+     * Many Ventas have One Credito.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Credito", inversedBy="ventas")
+     * @ORM\JoinColumn(name="credito_id", referencedColumnName="id")
+     */
+    private $credito;
+
+    /**
+     * One Venta has Many creditos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Credito", mappedBy="venta")
+     */
+    private $creditos;
+
+    public function __construct() {
+        $this->creditos = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdPedido(): ?int
-    {
-        return $this->id_pedido;
-    }
-
-    public function setIdPedido(int $id_pedido): self
-    {
-        $this->id_pedido = $id_pedido;
-
-        return $this;
-    }
-
-    public function getIdUsuario(): ?int
-    {
-        return $this->id_usuario;
-    }
-
-    public function setIdUsuario(int $id_usuario): self
-    {
-        $this->id_usuario = $id_usuario;
-
-        return $this;
     }
 
     public function getTipoVenta(): ?string
@@ -189,5 +189,37 @@ class Venta
         $this->estado = $estado;
 
         return $this;
+    }
+    
+    public function getUsuario(): ?usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getPedido(): ?pedido
+    {
+        return $this->pedido;
+    }
+
+    public function setPedido(?Pedido $pedido): self
+    {
+        $this->pedido = $pedido;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Creditos[]
+     */
+    public function getCreditos(): Collection
+    {
+        return $this->creditos;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IngresoRepository")
@@ -15,21 +16,6 @@ class Ingreso
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_usuario;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_sucursal;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_proveedor;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -66,45 +52,40 @@ class Ingreso
      */
     private $estado;
 
+    /**
+     * Many Ingresos have One Sucursal.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sucursal", inversedBy="ingresos")
+     * @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
+     */
+    private $sucursal;
+
+    /**
+     * Many Ingresos have One Usuario.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="ingresos")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
+
+    /**
+     * Many Ingresos have One Persona.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="ingresos")
+     * @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
+     */
+    private $persona;
+
+    /**
+     * One Ingreso has Many ingresoDetalles.
+     * @ORM\OneToMany(targetEntity="App\Entity\IngresoDetalle", mappedBy="ingreso")
+     */
+    private $ingresoDetalles;
+
+    public function __construct() {
+        $this->ingresoDetalles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdUsuario(): ?int
-    {
-        return $this->id_usuario;
-    }
-
-    public function setIdUsuario(int $id_usuario): self
-    {
-        $this->id_usuario = $id_usuario;
-
-        return $this;
-    }
-
-    public function getIdSucursal(): ?int
-    {
-        return $this->id_sucursal;
-    }
-
-    public function setIdSucursal(int $id_sucursal): self
-    {
-        $this->id_sucursal = $id_sucursal;
-
-        return $this;
-    }
-
-    public function getIdProveedor(): ?int
-    {
-        return $this->id_proveedor;
-    }
-
-    public function setIdProveedor(int $id_proveedor): self
-    {
-        $this->id_proveedor = $id_proveedor;
-
-        return $this;
     }
 
     public function getTipoComprobanate(): ?string
@@ -189,5 +170,49 @@ class Ingreso
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function getSucursal(): ?sucursal
+    {
+        return $this->sucursal;
+    }
+
+    public function setSucursal(?Sucursal $sucursal): self
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+    
+    public function getUsuario(): ?usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getPersona(): ?persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(?Persona $persona): self
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IngresoDetalles[]
+     */
+    public function getIngresoDetalles(): Collection
+    {
+        return $this->ingresoDetalles;
     }
 }

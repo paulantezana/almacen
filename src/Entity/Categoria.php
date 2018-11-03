@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoriaRepository")
@@ -25,6 +26,16 @@ class Categoria
      * @ORM\Column(type="boolean")
      */
     private $estado;
+
+    /**
+     * One Categoria has Many articulos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="categoria")
+     */
+    private $articulos;
+
+    public function __construct() {
+        $this->articulos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -53,5 +64,13 @@ class Categoria
         $this->estado = $estado;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Articulos[]
+     */
+    public function getArticulos(): Collection
+    {
+        return $this->articulos;
     }
 }

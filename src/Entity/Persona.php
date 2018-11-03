@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
@@ -75,6 +76,23 @@ class Persona
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $estado;
+
+    /**
+     * One Persona has Many ingresos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Ingreso", mappedBy="persona")
+     */
+    private $ingresos;
+
+    /**
+     * One Persona has Many pedidos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Pedido", mappedBy="persona")
+     */
+    private $pedidos;
+
+    public function __construct() {
+        $this->ingresos = new ArrayCollection();
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -223,5 +241,21 @@ class Persona
         $this->estado = $estado;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Ingresos[]
+     */
+    public function getIngresos(): Collection
+    {
+        return $this->ingresos;
+    }
+
+    /**
+     * @return Collection|Pedidos[]
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
     }
 }

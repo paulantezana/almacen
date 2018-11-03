@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
@@ -15,16 +16,6 @@ class Usuario
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_sucursal;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_empleado;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -81,33 +72,47 @@ class Usuario
      */
     private $estado;
 
+    /**
+     * Many Usuarios have One Empleado.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado", inversedBy="usuarios")
+     * @ORM\JoinColumn(name="empleado_id", referencedColumnName="id")
+     */
+    private $empleado;
+
+    /**
+     * Many Usuarios have One Sucursal.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sucursal", inversedBy="usuarios")
+     * @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
+     */
+    private $sucursal;
+
+    /**
+     * One Usuario has Many ingresos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Ingreso", mappedBy="usuario")
+     */
+    private $ingresos;
+
+    /**
+     * One Usuario has Many ventas.
+     * @ORM\OneToMany(targetEntity="App\Entity\Venta", mappedBy="usuario")
+     */
+    private $ventas;
+
+    /**
+     * One Usuario has Many pedidos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Pedido", mappedBy="usuario")
+     */
+    private $pedidos;
+
+    public function __construct() {
+        $this->ingresos = new ArrayCollection();
+        $this->ventas = new ArrayCollection();
+        $this->pedidos = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdSucursal(): ?int
-    {
-        return $this->id_sucursal;
-    }
-
-    public function setIdSucursal(?int $id_sucursal): self
-    {
-        $this->id_sucursal = $id_sucursal;
-
-        return $this;
-    }
-
-    public function getIdEmpleado(): ?int
-    {
-        return $this->id_empleado;
-    }
-
-    public function setIdEmpleado(int $id_empleado): self
-    {
-        $this->id_empleado = $id_empleado;
-
-        return $this;
     }
 
     public function getPerfil(): ?string
@@ -240,5 +245,53 @@ class Usuario
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function getEmpleado(): ?empleado
+    {
+        return $this->empleado;
+    }
+
+    public function setEmpleado(?Empleado $empleado): self
+    {
+        $this->empleado = $empleado;
+
+        return $this;
+    }
+
+    public function getSucursal(): ?sucursal
+    {
+        return $this->sucursal;
+    }
+
+    public function setSucursal(?Sucursal $sucursal): self
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ingresos[]
+     */
+    public function getIngresos(): Collection
+    {
+        return $this->ingresos;
+    }
+
+    /**
+     * @return Collection|Ventas[]
+     */
+    public function getVentas(): Collection
+    {
+        return $this->ventas;
+    }
+
+    /**
+     * @return Collection|Pedidos[]
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
     }
 }

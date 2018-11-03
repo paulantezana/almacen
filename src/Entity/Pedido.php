@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PedidoRepository")
@@ -15,21 +16,6 @@ class Pedido
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_cliente;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_usuario;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_sucursal;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -46,45 +32,47 @@ class Pedido
      */
     private $estado;
 
+    /**
+     * Many Pedidos have One Sucursal.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sucursal", inversedBy="pedidos")
+     * @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
+     */
+    private $sucursal;
+
+    /**
+     * Many Pedidos have One Usuario.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="pedidos")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
+
+    /**
+     * Many Pedidos have One Persona.
+     * @ORM\ManyToOne(targetEntity="App\Entity\Persona", inversedBy="pedidos")
+     * @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
+     */
+    private $persona;
+
+    /**
+     * One Pedido has Many ventas.
+     * @ORM\OneToMany(targetEntity="App\Entity\Venta", mappedBy="pedido")
+     */
+    private $ventas;
+
+    /**
+     * One Pedido has Many pedidoDetalles.
+     * @ORM\OneToMany(targetEntity="App\Entity\PedidoDetalle", mappedBy="pedido")
+     */
+    private $pedidoDetalles;
+
+    public function __construct() {
+        $this->ventas = new ArrayCollection();
+        $this->pedidoDetalles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCliente(): ?int
-    {
-        return $this->id_cliente;
-    }
-
-    public function setIdCliente(int $id_cliente): self
-    {
-        $this->id_cliente = $id_cliente;
-
-        return $this;
-    }
-
-    public function getIdUsuario(): ?int
-    {
-        return $this->id_usuario;
-    }
-
-    public function setIdUsuario(int $id_usuario): self
-    {
-        $this->id_usuario = $id_usuario;
-
-        return $this;
-    }
-
-    public function getIdSucursal(): ?int
-    {
-        return $this->id_sucursal;
-    }
-
-    public function setIdSucursal(int $id_sucursal): self
-    {
-        $this->id_sucursal = $id_sucursal;
-
-        return $this;
     }
 
     public function getTipoPedido(): ?string
@@ -121,5 +109,57 @@ class Pedido
         $this->estado = $estado;
 
         return $this;
+    }
+
+    public function getSucursal(): ?sucursal
+    {
+        return $this->sucursal;
+    }
+
+    public function setSucursal(?Sucursal $sucursal): self
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getPersona(): ?persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(?Persona $persona): self
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ventas[]
+     */
+    public function getVentas(): Collection
+    {
+        return $this->ventas;
+    }
+    
+    /**
+     * @return Collection|DedidoDetalles[]
+     */
+    public function getDedidoDetalles(): Collection
+    {
+        return $this->pedidoDetalles;
     }
 }

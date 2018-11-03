@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SucursalRepository")
@@ -60,6 +61,30 @@ class Sucursal
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $estado;
+
+    /**
+     * One Sucursal has Many usuarios.
+     * @ORM\OneToMany(targetEntity="App\Entity\Usuario", mappedBy="sucursal")
+     */
+    private $usuarios;
+
+    /**
+     * One Sucursal has Many ingresos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Ingreso", mappedBy="sucursal")
+     */
+    private $ingresos;
+
+    /**
+     * One Sucursal has Many pedidos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Pedido", mappedBy="sucursal")
+     */
+    private $pedidos;
+
+    public function __construct() {
+        $this->usuarios = new ArrayCollection();
+        $this->ingresos = new ArrayCollection();
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -172,5 +197,29 @@ class Sucursal
         $this->estado = $estado;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Usuarios[]
+     */
+    public function getUsuarios(): Collection
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * @return Collection|Ingresos[]
+     */
+    public function getIngresos(): Collection
+    {
+        return $this->ingresos;
+    }
+
+    /**
+     * @return Collection|Pedidos[]
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
     }
 }

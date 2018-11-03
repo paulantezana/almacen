@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmpleadoRepository")
@@ -75,6 +76,16 @@ class Empleado
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $estado;
+
+    /**
+     * One Empleado has Many usuarios.
+     * @ORM\OneToMany(targetEntity="App\Entity\Usuario", mappedBy="empleado")
+     */
+    private $usuarios;
+
+    public function __construct() {
+        $this->usuarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -223,5 +234,13 @@ class Empleado
         $this->estado = $estado;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Usuarios[]
+     */
+    public function getUsuarios(): Collection
+    {
+        return $this->usuarios;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UnidadMedidaRepository")
@@ -30,6 +31,16 @@ class UnidadMedida
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $estado;
+
+    /**
+     * One UnidadMedida has Many articulos.
+     * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="unidadMedida")
+     */
+    private $articulos;
+
+    public function __construct() {
+        $this->articulos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,5 +81,13 @@ class UnidadMedida
         $this->estado = $estado;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Articulos[]
+     */
+    public function getArticulos(): Collection
+    {
+        return $this->articulos;
     }
 }
