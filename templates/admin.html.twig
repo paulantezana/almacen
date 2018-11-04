@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div>
+            <!-- #Left Sidebar ==================== -->
+            <div class="sidebar">
+                <div class="sidebar-inner">
+                    <!-- ### $Sidebar Header ### -->
+                    <div class="sidebar-logo">
+                        <div class="peers ai-c fxw-nw">
+                            <div class="peer peer-greed">
+                                {# <a class="sidebar-link td-n">
+                                    <div class="peers ai-c fxw-nw">
+                                        <div class="peer">
+                                            <div class="logo">
+                                                <img src="{{ asset('build/images/logo.svg') }}" alt="logo" />
+                                            </div>
+                                        </div>
+                                        <div class="peer peer-greed">
+                                            <h5 class="lh-1 mB-0 logo-text">Symfonator</h5>
+                                        </div>
+                                    </div>
+                                </a> #}
+                            </div>
+                            <div class="peer">
+                                <div class="mobile-toggle sidebar-toggle">
+                                    <a href="" class="td-n">
+                                        <i class="ti-arrow-circle-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- ### $Sidebar Menu ### -->
+                    <ul class="sidebar-menu">
+                        <li><a href="">Escritorio</a></li>
+                        <li>
+                            <a href="">Mantenimiento</a>
+                            <ul>
+                                <li><a href="">General</a></li>
+                                <li><a href="">Sucursal</a></li>
+                                <li><a href="">Empleados</a></li>
+                                <li><a href="">Usuarios</a></li>
+                                <li><a href="">Tipo Documento</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Almacén</a>
+                            <ul>
+                                <li><a href="">Artículos</a></li>
+                                <li><a href="">Categorías</a></li>
+                                <li><a href="">Unidades de Medida</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Compras</a>
+                            <ul>
+                                <li><a href="">Ingresos</a></li>
+                                <li><a href="">Proveedores</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Ventas</a>
+                            <ul>
+                                <li><a href="">Ventas</a></li>
+                                <li><a href="">Pedidos</a></li>
+                                <li><a href="">Clientes</a></li>
+                                <li><a href="">Crédito</a></li>
+                                <li><a href="">Deudas Pendientes</a></li>
+                                <li><a href="">Conf. Comprobantes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">Seguridad</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- #Main ============================ -->
+            <div class="page-container">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        {% block javascripts %}{% endblock %}
+        <script src="{{ asset('build/admin.js') }}"></script>
+    </body>
+</html>

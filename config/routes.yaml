@@ -1,3 +1,64 @@
 index:
     path: /
     controller: App\Controller\Web\HomeController::index
+
+
+# Toda las rustas de sub menu mantenimiento 
+admin_mantenimiento_general:
+    path: /admin/general
+    controller: App\Controller\Admin\UsuarioController::index
+admin_mantenimiento_sucursal:
+    path: /admin/sucursal
+    controller: App\Controller\Admin\SucursalController::index
+admin_mantenimiento_empleado:
+    path: /admin/empleado
+    controller: App\Controller\Admin\UsuarioController::index
+admin_mantenimiento_usuario:
+    path: /admin/usuario
+    controller: App\Controller\Admin\UsuarioController::index
+admin_mantenimiento_tipo_documento:
+    path: /admin/tipodocumento
+    controller: App\Controller\Admin\UsuarioController::index
+
+
+
+# Toda las rustas de sub menu almace
+admin_almacen_articulo:
+    path: /admin/articulo
+    controller: App\Controller\Admin\UsuarioController::index
+admin_almacen_categoria:
+    path: /admin/categoria
+    controller: App\Controller\Admin\UsuarioController::index
+admin_almacen_unidad_medida:
+    path: /admin/unidadmedida
+    controller: App\Controller\Admin\UsuarioController::index
+
+
+# Toda las rustas de sub menu compras
+admin_compra_ingreso:
+    path: /admin/ingreso
+    controller: App\Controller\Admin\UsuarioController::index
+admin_compra_proveedor:
+    path: /admin/proveedor
+    controller: App\Controller\Admin\UsuarioController::index
+
+
+# Toda las rustas de sub menu ventas
+admin_venta_venta:
+    path: /admin/venta
+    controller: App\Controller\Admin\UsuarioController::index
+admin_venta_pedido:
+    path: /admin/pedido
+    controller: App\Controller\Admin\UsuarioController::index
+admin_venta_cliente:
+    path: /admin/cliente
+    controller: App\Controller\Admin\UsuarioController::index
+admin_venta_credito:
+    path: /admin/credito
+    controller: App\Controller\Admin\UsuarioController::index
+admin_venta_deuda_pendiente:
+    path: /admin/deudapendiente
+    controller: App\Controller\Admin\UsuarioController::index
+admin_venta_conf_comprobante:
+    path: /admin/confcomprobante
+    controller: App\Controller\Admin\UsuarioController::index

@@ -1,0 +1,148 @@
+// Variables de color Sass
+// Colors
+$color-fisrt : #007BDF;
+$color-first-alt : #006DC6;
+$color-second : #00CBFF;
+$color-second-alt : #00BFF0;
+$color-third : #FF3C32;
+$color-third-alt : #FF2419;
+$color-accent : #FBA905;
+$color-accent-alt : #F1A000;
+$color-dark : #282D31;
+$color-dark-alt : #141618;
+$color-border : #DFE0E0;
+$color-light : #F6F6F6;
+$color-text : #53575A;
+$color-body-bg : #FAFDFF;
+
+// Variables de color CSS
+:root {
+  --color-first      : #007BDF;
+  --color-first-alt  : #006DC6;
+  --color-second     : #00CBFF;
+  --color-second-alt : #00BFF0;
+  --color-third      : #FF3C32;
+  --color-third-alt  : #FF2419;
+  --color-accent     : #FBA905;
+  --color-accent-alt : #F1A000;
+  --color-light      : #F6F6F6;
+  --color-dark       : #282D31;
+  --color-dark-alt   : #141618;
+  --color-border     : #DFE0E0;
+  --color-text       : #53575A;
+  --color-body-bg    : #FCFCFC;
+  --color-button     : var(--color-first);
+  --color-button-alt : var(--color-first-alt)
+}
+
+// Combinaciones de colores
+.color-first {
+  --color     : var(--color-first);
+  --color-alt : var(--color-accent);
+}
+
+.color-second {
+  --color            : var(--color-second);
+  --color-alt        : var(--color-third);
+  --color-button     : var(--color-second);
+  --color-button-alt : var(--color-second-alt);
+}
+
+.color-third {
+  --color            : var(--color-third);
+  --color-alt        : var(--color-accent);
+  --color-button     : var(--color-third);
+  --color-button-alt : var(--color-third-alt);
+}
+
+.color-accent {
+  --color            : var(--color-accent);
+  --color-alt        : var(--color-third);
+  --color-button     : var(--color-accent);
+  --color-button-alt : var(--color-accent-alt);
+}
+
+.color-dark {
+  --color            : var(--color-dark);
+  --color-alt        : var(--color-accent);
+  --color-button     : var(--color-dark);
+  --color-button-alt : var(--color-dark-alt);
+}
+
+.color-light {
+  --color            : var(--color-light);
+  --color-alt        : var(--color-text);
+  --color-button     : #FFF;
+  --color-button-alt : var(--color-light);
+
+  .button {
+    color : var(--color-text)
+  }
+
+  .button--ghost:hover {
+    color : var(--color-text)
+  }
+}
+
+.colors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  grid-gap: 2rem;
+  margin-bottom: 2rem;
+
+}
+
+.color {
+  box-shadow: 0 3px 6px -3px rgba(#000,.1);
+
+  $sassColorsMap: (
+    colorFisrt: $color-fisrt,
+    colorFirstAlt: $color-first-alt,
+    colorSecond: $color-second,
+    colorSecondAlt: $color-second-alt,
+    colorThird: $color-third,
+    colorThirdAlt: $color-third-alt,
+    colorAccent: $color-accent,
+    colorAccentAlt: $color-accent-alt,
+    colorDark: $color-dark,
+    colorDarkAlt: $color-dark-alt,
+    colorBorder: $color-border,
+    colorLight: $color-light,
+    colorText: $color-text,
+    colorBody-bg: $color-body-bg,
+  );
+
+  &__sample {
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius : .25rem .25rem 0 0;
+
+    &.bodyBg {
+      border : 1px solid var(--color-border);
+    }
+
+    @each $colorName,$colorVar in $sassColorsMap {
+      &.#{$colorName} {
+        background: $colorVar;
+      }
+    }
+  }
+
+  &__info {
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-top: none;
+    padding: 1em;
+    background : #fff;
+    border-radius : 0 0 .25rem .25rem;
+  }
+
+  &__name,
+  &__code {
+    margin: 0;
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+}
