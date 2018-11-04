@@ -14,7 +14,7 @@
             $entityManager = $this->getDoctrine()->getManager();
             $sucursal = $entityManager->getRepository(Sucursal::class);
             return $this->render('admin/sucursal/index.html.twig',[
-                'sucursal' => $sucursal,
+                'sucursales' => $sucursal,
             ]);
         }
 
