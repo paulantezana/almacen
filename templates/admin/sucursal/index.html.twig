@@ -1,24 +1,51 @@
 {% extends 'admin.html.twig' %}
 {% block body %}
-    <button type="button" class="btn btn-primary">Nuevo</button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for sucursal in sucursales %}
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-body crud">
+            <div class="crud-header">
+                <a href="{{ path('admin_mantenimiento_sucursal_add') }}">
+                    <button type="button" class="btn btn-primary">Nuevo</button>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Razón Social</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for sucursal in sucursales %}
+                            <tr>
+                                <th>{{ sucursal.getRazonSocial() }}</th>
+                                <td>{{ sucursal.getTipoDocumento() }} {{ sucursal.getNumeroDocumento() }}</td>
+                                <td>{{ sucursal.getDireccion() }}</td>
+                                <td>{{ sucursal.getEmail() }}</td>
+                                <td>{{ sucursal.getLogo() }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                    <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 {% endblock %}

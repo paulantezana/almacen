@@ -12,3 +12,15 @@
 // @import "components/sidebar.scss";
 
 @import "~bootstrap/scss/bootstrap";
+
+.crud{
+    &-header{
+        button{
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+    }
+    table{
+        margin-bottom: 1rem;
+    }
+}

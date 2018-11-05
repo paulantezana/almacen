@@ -7,9 +7,26 @@ index:
 admin_mantenimiento_general:
     path: /admin/general
     controller: App\Controller\Admin\UsuarioController::index
+
 admin_mantenimiento_sucursal:
     path: /admin/sucursal
     controller: App\Controller\Admin\SucursalController::index
+admin_mantenimiento_sucursal_add:
+    path: /admin/sucursal/add
+    controller: App\Controller\Admin\SucursalController::add
+admin_mantenimiento_sucursal_edit:
+    path: /admin/sucursal/{id}/edit
+    controller: App\Controller\Admin\SucursalController::edit
+admin_mantenimiento_sucursal_create:
+    path: /admin/sucursal/create
+    controller: App\Controller\Admin\SucursalController::create
+admin_mantenimiento_sucursal_update:
+    path: /admin/sucursal/update
+    controller: App\Controller\Admin\SucursalController::update
+admin_mantenimiento_sucursal_delete:
+    path: /admin/sucursal/delete
+    controller: App\Controller\Admin\SucursalController::delete
+
 admin_mantenimiento_empleado:
     path: /admin/empleado
     controller: App\Controller\Admin\UsuarioController::index
