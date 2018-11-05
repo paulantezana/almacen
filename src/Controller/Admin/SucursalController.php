@@ -21,12 +21,12 @@
         }
 
         public function add(){
-            $sucursal = new Sucursal();
-            $form = $this->createForm(SucursalType::class, $sucursal);
-            return $this->render('admin/sucursal/add.html.twig',[
-                'sucursales' => '',
-                'form'=>$form->createView(),
-            ]);
+            // $sucursal = new Sucursal();
+            // $form = $this->createForm(SucursalType::class, $sucursal);
+            // return $this->render('admin/sucursal/add.html.twig',[
+            //     'sucursales' => '',
+            //     'form'=>$form->createView(),
+            // ]);
         }
 
         public function edit(){
@@ -36,11 +36,31 @@
         }
 
         public function create(Request $request){
-            // return $this->red;
+            $sucursal = new Sucursal();
+            $form_new = $this->createForm(SucursalType::class,$sucursal);
+            $form_new->handleRequest($request);
+            if ($form_new->isSubmitted() && $form_new->isValid()){
+                $orm = $this->getDoctrine()->getManager();
+                $orm->flush();
+                return $this->redirectToRoute('admin_mantenimiento_sucursal');
+            }
+            return $this->render("admin/sucursal/add.html.twig",[
+                'form_new' => $form_new->createView(),
+                'sucursal' => $sucursal,
+            ]);
         }
 
-        public function update(Request $request){
-
+        public function update(Request $request, Sucursal $sucursal){
+            $form_update = $this->createForm(SucursalType::class,$sucursal);
+            $form_update->handleRequest($request);
+            if ($form_update->isSubmitted() && $form_update->isValid()){
+                $this->getDoctrine()->getManager()->flush();
+                $this->redirectToRoute('admin_mantenimiento_sucursal');
+            }
+            return $this->render("AdminBundle:Article:update.html.twig",[
+                'sucursal'                => $sucursal,
+                'form_update'           => $form_update->createView(),
+            ]);
         }
 
         public function delete(Request $request){
