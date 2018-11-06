@@ -3,9 +3,15 @@
     <div class="card">
         <div class="card-body">
             {{ form_start(form_create) }}
-                <div class="form-group">
-                    {{ form_label(form_create.razon_social,'Razón Social (*):') }}
-                    {{ form_widget(form_create.razon_social, {'attr':{'class':'form-control'}}) }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.apellidos,'Apellidos (*):') }}
+                        {{ form_widget(form_create.apellidos, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.nombres,'Nombre (*):') }}
+                        {{ form_widget(form_create.nombres, {'attr':{'class':'form-control'}}) }}
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -33,17 +39,29 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        {{ form_label(form_create.representante,'Representante:') }}
-                        {{ form_widget(form_create.representante, {'attr':{'class':'form-control'}}) }}
+                        {{ form_label(form_create.fecha_nacimiento,'Fecha Nacimiento:') }}
+                        {{ form_widget(form_create.fecha_nacimiento, {'attr':{'class':'form-control'}}) }}
                     </div>
                     <div class="form-group col-md-6">
-                        {{ form_label(form_create.logo,'Logo:') }}
-                        {{ form_widget(form_create.logo, {'attr':{'class':'form-control'}}) }}
+                        {{ form_label(form_create.foto,'Foto:') }}
+                        {{ form_widget(form_create.foto, {'attr':{'class':'form-control'}}) }}
                     </div>
                 </div>
-                <div class="form-check">
-                    {{ form_widget(form_create.estado, {'attr':{'class':'form-check-input'}}) }}
-                    {{ form_label(form_create.estado,'Estado', {'attr':{'class':'form-check-label'}}) }}
+                <div class="form-group">
+                    <div class="form-check">
+                        {{ form_widget(form_create.estado, {'attr':{'class':'form-control'}}) }}
+                        {{ form_label(form_create.estado,'Estado') }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.login,'Login (*):') }}
+                        {{ form_widget(form_create.login, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.clave,'Clave (*):') }}
+                        {{ form_widget(form_create.clave, {'attr':{'class':'form-control'}}) }}
+                    </div>
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Guardar" />

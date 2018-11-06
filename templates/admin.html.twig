@@ -104,7 +104,7 @@
                         <li class="nav-item mT-30 active">
                             <a class="sidebar-link" href="index.html">
                                 <span class="icon-holder">
-                                <i class="c-blue-500 ti-home"></i>
+                                    <i class="c-blue-500 ti-home"></i>
                                 </span>
                                 <span class="title">Escritorio</span>
                             </a>
@@ -120,7 +120,7 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class='sidebar-link' href="">General</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_mantenimiento_general') }}">General</a></li>
                                 <li><a class='sidebar-link' href="{{ path('admin_mantenimiento_sucursal') }}">Sucursal</a></li>
                                 <li><a class='sidebar-link' href="{{ path('admin_mantenimiento_empleado') }}">Empleados</a></li>
                                 <li><a class='sidebar-link' href="{{ path('admin_mantenimiento_usuario') }}">Usuarios</a></li>
@@ -138,9 +138,9 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class='sidebar-link' href="">Artículos</a></li>
-                                <li><a class='sidebar-link' href="">Categorías</a></li>
-                                <li><a class='sidebar-link' href="">Unidades de Medida</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_almacen_articulo') }}">Artículos</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_almacen_categoria') }}">Categorías</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_almacen_unidad_medida') }}">Unidades de Medida</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -154,9 +154,8 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class='sidebar-link' href="">Ingresos</a></li>
-                                <li><a class='sidebar-link' href="">Proveedores</a></li>
-                                <li><a class='sidebar-link' href="">Unidades de Medida</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_compra_ingreso') }}">Ingresos</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_compra_proveedor') }}">Proveedores</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -170,12 +169,11 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class='sidebar-link' href="">Ventas</a></li>
-                                <li><a class='sidebar-link' href="">Pedidos</a></li>
-                                <li><a class='sidebar-link' href="">Clientes</a></li>
-                                <li><a class='sidebar-link' href="">Crédito</a></li>
-                                <li><a class='sidebar-link' href="">Deudas Pendientes</a></li>
-                                <li><a class='sidebar-link' href="">Conf. Comprobantes</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_venta_venta') }}">Ventas</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_venta_pedido') }}">Pedidos</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_venta_cliente') }}">Clientes</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_venta_credito') }}">Crédito</a></li>
+                                <li><a class='sidebar-link' href="{{ path('admin_venta_deuda_pendiente') }}">Deudas Pendientes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item mT-30 active">

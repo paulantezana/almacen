@@ -4,12 +4,12 @@
         <div class="card-body">
             {{ form_start(form_create) }}
                 <div class="form-group">
-                    {{ form_label(form_create.nombre,'Nombre del Documento (No deje espacios en blanco) (*):') }}
+                    {{ form_label(form_create.nombre,'Nombre (*):') }}
                     {{ form_widget(form_create.nombre, {'attr':{'class':'form-control'}}) }}
                 </div>
-                <div class="form-group">
-                    {{ form_label(form_create.operacion,'Operación (*):') }}
-                    {{ form_widget(form_create.operacion, {'attr':{'class':'form-control'}}) }}
+                <div class="form-check">
+                    {{ form_widget(form_create.estado, {'attr':{'class':'form-check-input'}}) }}
+                    {{ form_label(form_create.estado,'Estado', {'attr':{'class':'form-check-label'}}) }}
                 </div>
                 <input type="submit" class="btn btn-primary" value="Guardar" />
             {{ form_end(form_create) }}

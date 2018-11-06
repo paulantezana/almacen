@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body crud">
             <div class="crud-header">
-                <a href="{{ path('admin_mantenimiento_tipo_documento_create') }}">
+                <a href="{{ path('admin_almacen_categoria_create') }}">
                     <button type="button" class="btn btn-primary">Nuevo</button>
                 </a>
             </div>
@@ -11,22 +11,20 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Operación</th>
+                            <th scope="col">Categoria</th>
                             <th scope="col">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        {% for tipodocumento in tipodocumentos %}
+                        {% for categoria in categorias %}
                             <tr>
-                                <th>{{ tipodocumento.getNombre() }}</th>
-                                <td>{{ tipodocumento.getOperacion() }}</td>
+                                <th>{{ categoria.getNombre() }}</th>
                                 <td>
-                                    <a href="/admin/tipodocumento/update/{{tipodocumento.getId()}}">
+                                    <a href="/admin/categoria/update/{{categoria.getId()}}">
                                         <button type="button" class="btn btn-sm btn-primary">Editar</button>
                                     </a>
-                                    <a href="/admin/tipodocumento/delete/{{tipodocumento.getId()}}">
+                                    <a href="/admin/categoria/delete/{{categoria.getId()}}">
                                         <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
                                     </a>
                                 </td>

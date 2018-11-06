@@ -14,15 +14,8 @@ class TipoDocumentoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('razon_social')
-            ->add('tipo_documento')
-            ->add('numero_documento')
-            ->add('direccion')
-            ->add('telefono')
-            ->add('email', EmailType::class)
-            ->add('representante')
-            ->add('logo')
-            ->add('estado',CheckboxType::class)
+            ->add('nombre')
+            ->add('operacion')
         ;
     }
 

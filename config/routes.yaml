@@ -69,6 +69,19 @@ admin_mantenimiento_tipo_documento_delete:
     path: /admin/tipodocumento/delete/{id}
     controller: App\Controller\Admin\TipoDocumentoController::delete
 
+admin_almacen_unidad_medida:
+    path: /admin/unidadmedida
+    controller: App\Controller\Admin\UnidadMedidaController::index
+admin_almacen_unidad_medida_create:
+    path: /admin/unidadmedida/create
+    controller: App\Controller\Admin\UnidadMedidaController::create
+admin_almacen_unidad_medida_update:
+    path: /admin/unidadmedida/update/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::update
+admin_almacen_unidad_medida_delete:
+    path: /admin/unidadmedida/delete/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::delete
+
 
 
 # Toda las rustas de sub menu almace
@@ -98,34 +111,21 @@ admin_almacen_categoria_delete:
     path: /admin/categoria/delete/{id}
     controller: App\Controller\Admin\CategoriaController::delete
 
-admin_almacen_unidad_medida:
-    path: /admin/unidadmedida
-    controller: App\Controller\Admin\UnidadMedidaController::index
-admin_almacen_unidad_medida_create:
-    path: /admin/unidadmedida/create
-    controller: App\Controller\Admin\UnidadMedidaController::create
-admin_almacen_unidad_medida_update:
-    path: /admin/unidadmedida/update/{id}
-    controller: App\Controller\Admin\UnidadMedidaController::update
-admin_almacen_unidad_medida_delete:
-    path: /admin/unidadmedida/delete/{id}
-    controller: App\Controller\Admin\UnidadMedidaController::delete
-
 
 
 # Toda las rustas de sub menu compras
 admin_compra_ingreso:
     path: /admin/ingreso
-    controller: App\Controller\Admin\UnidadMedidaController::index
+    controller: App\Controller\Admin\IngresoController::index
 admin_compra_ingreso_create:
     path: /admin/ingreso/create
-    controller: App\Controller\Admin\UnidadMedidaController::create
+    controller: App\Controller\Admin\IngresoController::create
 admin_compra_ingreso_update:
     path: /admin/ingreso/update/{id}
-    controller: App\Controller\Admin\UnidadMedidaController::update
+    controller: App\Controller\Admin\IngresoController::update
 admin_compra_ingreso_delete:
     path: /admin/ingreso/delete/{id}
-    controller: App\Controller\Admin\UnidadMedidaController::delete
+    controller: App\Controller\Admin\IngresoController::delete
 
 admin_compra_proveedor:
     path: /admin/proveedor
@@ -197,26 +197,26 @@ admin_venta_credito_delete:
 
 admin_venta_deuda_pendiente:
     path: /admin/deudapendiente
-    controller: App\Controller\Admin\DeudaPendieContetroller::index
+    controller: App\Controller\Admin\DeudaPendienteController::index
 admin_venta_deuda_pendiente_create:
     path: /admin/deudapendiente/create
-    controller: App\Controller\Admin\DeudaPendieContetroller::create
+    controller: App\Controller\Admin\DeudaPendienteController::create
 admin_venta_deuda_pendiente_update:
     path: /admin/deudapendiente/update/{id}
-    controller: App\Controller\Admin\DeudaPendieContetroller::update
+    controller: App\Controller\Admin\DeudaPendienteController::update
 admin_venta_deuda_pendiente_delete:
     path: /admin/deudapendiente/delete/{id}
-    controller: App\Controller\Admin\DeudaPendieContetroller::delete
+    controller: App\Controller\Admin\DeudaPendienteController::delete
 
-admin_venta_conf_comprobante:
-    path: /admin/confcomprobante
-    controller: App\Controller\Admin\ConfComprobanteContetroller::index
-admin_venta_conf_comprobante_create:
-    path: /admin/confcomprobante/create
-    controller: App\Controller\Admin\ConfComprobanteContetroller::create
-admin_venta_conf_comprobante_update:
-    path: /admin/confcomprobante/update/{id}
-    controller: App\Controller\Admin\ConfComprobanteContetroller::update
-admin_venta_conf_comprobante_delete:
-    path: /admin/confcomprobante/delete/{id}
-    controller: App\Controller\Admin\ConfComprobanteContetroller::delete
+# admin_venta_conf_comprobante:
+#     path: /admin/confcomprobante
+#     controller: App\Controller\Admin\ConfComprobanteContetroller::index
+# admin_venta_conf_comprobante_create:
+#     path: /admin/confcomprobante/create
+#     controller: App\Controller\Admin\ConfComprobanteContetroller::create
+# admin_venta_conf_comprobante_update:
+#     path: /admin/confcomprobante/update/{id}
+#     controller: App\Controller\Admin\ConfComprobanteContetroller::update
+# admin_venta_conf_comprobante_delete:
+#     path: /admin/confcomprobante/delete/{id}
+#     controller: App\Controller\Admin\ConfComprobanteContetroller::delete

@@ -11,11 +11,10 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Razón Social</th>
-                            <th scope="col">Documento</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Logo</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Trabajador</th>
+                            <th scope="col">Tipo de Usuario</th>
+                            <th scope="col">Fecha de Registro</th>
                             <th scope="col">Opciones</th>
                         </tr>
                     </thead>
@@ -23,16 +22,15 @@
                         
                         {% for usuario in usuarios %}
                             <tr>
-                                <th>{{ usuario.getRazonSocial() }}</th>
-                                <td>{{ usuario.getTipoDocumento() }} {{ usuario.getNumeroDocumento() }}</td>
-                                <td>{{ usuario.getDireccion() }}</td>
-                                <td>{{ usuario.getEmail() }}</td>
-                                <td>{{ usuario.getLogo() }}</td>
+                                <th>{{ usuario.getSucursal() }}</th>
+                                <td>{{ usuario.getTrabajador() }}</td>
+                                <td>{{ usuario.getPerfil() }}</td>
+                                <td>{{ usuario.getFechaRegistro() }}</td>
                                 <td>
-                                    <a href="/admin/sucursal/update/{{usuario.getId()}}">
+                                    <a href="/admin/usuario/update/{{usuario.getId()}}">
                                         <button type="button" class="btn btn-sm btn-primary">Editar</button>
                                     </a>
-                                    <a href="/admin/sucursal/delete/{{usuario.getId()}}">
+                                    <a href="/admin/usuario/delete/{{usuario.getId()}}">
                                         <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
                                     </a>
                                 </td>

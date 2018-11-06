@@ -1,0 +1,21 @@
+{% extends 'admin.html.twig' %}
+{% block main %}
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form_create) }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.nombre,'Nombre (*):') }}
+                        {{ form_widget(form_create.nombre, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form_label(form_create.prefijo,'Prefijo (*):') }}
+                        {{ form_widget(form_create.prefijo, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
+                
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+            {{ form_end(form_create) }}
+        </div>
+    </div>
+{% endblock %}
