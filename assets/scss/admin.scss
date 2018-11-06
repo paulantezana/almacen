@@ -1,17 +1,9 @@
-// @import "config/variables.scss";
-// @import "generic/base.scss";
-
-// @import "theme/color.scss";
-
-
-
-
-// @import "utils/media-queries.scss";
-
-// Components
-// @import "components/sidebar.scss";
-
+@import 'spec/settings/index';
+@import 'spec/tools/index';
 @import "~bootstrap/scss/bootstrap";
+@import 'spec/index';
+@import 'vendor/index';
+
 
 .crud{
     &-header{

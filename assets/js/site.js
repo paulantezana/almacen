@@ -8,4 +8,4 @@
 // any CSS you require will output into a single css file (app.css in this case)
 require('../scss/site.scss');
 
-import '../static/images/logo.svg';
+import '../static/images/logo.png';

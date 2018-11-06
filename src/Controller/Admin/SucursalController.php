@@ -20,50 +20,49 @@
             ]);
         }
 
-        public function add(){
-            // $sucursal = new Sucursal();
-            // $form = $this->createForm(SucursalType::class, $sucursal);
-            // return $this->render('admin/sucursal/add.html.twig',[
-            //     'sucursales' => '',
-            //     'form'=>$form->createView(),
-            // ]);
-        }
-
-        public function edit(){
-            return $this->render('admin/sucursal/edit.html.twig',[
-                'sucursales' => '',
-            ]);
-        }
-
         public function create(Request $request){
             $sucursal = new Sucursal();
-            $form_new = $this->createForm(SucursalType::class,$sucursal);
-            $form_new->handleRequest($request);
-            if ($form_new->isSubmitted() && $form_new->isValid()){
+            $form_create = $this->createForm(SucursalType::class,$sucursal);
+            $form_create->handleRequest($request);
+            if ($form_create->isSubmitted() && $form_create->isValid()){
+                $sucursal = $form_create->getData();
                 $orm = $this->getDoctrine()->getManager();
+                $orm->persist($sucursal);
                 $orm->flush();
                 return $this->redirectToRoute('admin_mantenimiento_sucursal');
             }
-            return $this->render("admin/sucursal/add.html.twig",[
-                'form_new' => $form_new->createView(),
+            return $this->render("admin/sucursal/create.html.twig",[
+                'form_create' => $form_create->createView(),
                 'sucursal' => $sucursal,
             ]);
         }
 
-        public function update(Request $request, Sucursal $sucursal){
+        public function update(Request $request, $id){
+            $sucursal = new Sucursal();
+            $sucursal = $this->getDoctrine()->getRepository(Sucursal::class)->find($id);
+
             $form_update = $this->createForm(SucursalType::class,$sucursal);
             $form_update->handleRequest($request);
+
             if ($form_update->isSubmitted() && $form_update->isValid()){
                 $this->getDoctrine()->getManager()->flush();
-                $this->redirectToRoute('admin_mantenimiento_sucursal');
+                return $this->redirectToRoute('admin_mantenimiento_sucursal');
             }
-            return $this->render("AdminBundle:Article:update.html.twig",[
+            return $this->render("admin/sucursal/update.html.twig",[
                 'sucursal'                => $sucursal,
                 'form_update'           => $form_update->createView(),
             ]);
         }
 
-        public function delete(Request $request){
+        public function delete(Request $request, $id){
+            $sucursal = $this->getDoctrine()->getRepository(Sucursal::class)->find($id);
 
+            $orm = $this->getDoctrine()->getManager();
+            $orm->remove($article);
+            $orm->flush();
+      
+            $response = new Response();
+            $response->send();
+            // return $this->redirectToRoute('admin_mantenimiento_sucursal');
         }
     }

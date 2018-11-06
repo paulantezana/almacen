@@ -6,76 +6,217 @@ index:
 # Toda las rustas de sub menu mantenimiento 
 admin_mantenimiento_general:
     path: /admin/general
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\GeneralController::index
+admin_mantenimiento_general_create:
+    path: /admin/general/create
+    controller: App\Controller\Admin\GeneralController::create
+admin_mantenimiento_general_update:
+    path: /admin/general/update/{id}
+    controller: App\Controller\Admin\GeneralController::update
+admin_mantenimiento_general_delete:
+    path: /admin/general/delete/{id}
+    controller: App\Controller\Admin\GeneralController::delete
 
 admin_mantenimiento_sucursal:
     path: /admin/sucursal
     controller: App\Controller\Admin\SucursalController::index
-admin_mantenimiento_sucursal_add:
-    path: /admin/sucursal/add
-    controller: App\Controller\Admin\SucursalController::add
-admin_mantenimiento_sucursal_edit:
-    path: /admin/sucursal/{id}/edit
-    controller: App\Controller\Admin\SucursalController::edit
 admin_mantenimiento_sucursal_create:
     path: /admin/sucursal/create
     controller: App\Controller\Admin\SucursalController::create
 admin_mantenimiento_sucursal_update:
-    path: /admin/sucursal/update
+    path: /admin/sucursal/update/{id}
     controller: App\Controller\Admin\SucursalController::update
 admin_mantenimiento_sucursal_delete:
-    path: /admin/sucursal/delete
+    path: /admin/sucursal/delete/{id}
     controller: App\Controller\Admin\SucursalController::delete
 
 admin_mantenimiento_empleado:
     path: /admin/empleado
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\EmpleadoController::index
+admin_mantenimiento_empleado_create:
+    path: /admin/empleado/create
+    controller: App\Controller\Admin\EmpleadoController::create
+admin_mantenimiento_empleado_update:
+    path: /admin/empleado/update/{id}
+    controller: App\Controller\Admin\EmpleadoController::update
+admin_mantenimiento_empleado_delete:
+    path: /admin/empleado/delete/{id}
+    controller: App\Controller\Admin\EmpleadoController::delete
+
 admin_mantenimiento_usuario:
     path: /admin/usuario
     controller: App\Controller\Admin\UsuarioController::index
+admin_mantenimiento_usuario_create:
+    path: /admin/usuario/create
+    controller: App\Controller\Admin\UsuarioController::create
+admin_mantenimiento_usuario_update:
+    path: /admin/usuario/update/{id}
+    controller: App\Controller\Admin\UsuarioController::update
+admin_mantenimiento_usuario_delete:
+    path: /admin/usuario/delete/{id}
+    controller: App\Controller\Admin\UsuarioController::delete
+
 admin_mantenimiento_tipo_documento:
     path: /admin/tipodocumento
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\TipoDocumentoController::index
+admin_mantenimiento_tipo_documento_create:
+    path: /admin/tipodocumento/create
+    controller: App\Controller\Admin\TipoDocumentoController::create
+admin_mantenimiento_tipo_documento_update:
+    path: /admin/tipodocumento/update/{id}
+    controller: App\Controller\Admin\TipoDocumentoController::update
+admin_mantenimiento_tipo_documento_delete:
+    path: /admin/tipodocumento/delete/{id}
+    controller: App\Controller\Admin\TipoDocumentoController::delete
 
 
 
 # Toda las rustas de sub menu almace
 admin_almacen_articulo:
     path: /admin/articulo
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\ArticuloController::index
+admin_almacen_articulo_create:
+    path: /admin/articulo/create
+    controller: App\Controller\Admin\ArticuloController::create
+admin_almacen_articulo_update:
+    path: /admin/articulo/update/{id}
+    controller: App\Controller\Admin\ArticuloController::update
+admin_almacen_articulo_delete:
+    path: /admin/articulo/delete/{id}
+    controller: App\Controller\Admin\ArticuloController::delete
+
 admin_almacen_categoria:
     path: /admin/categoria
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\CategoriaController::index
+admin_almacen_categoria_create:
+    path: /admin/categoria/create
+    controller: App\Controller\Admin\CategoriaController::create
+admin_almacen_categoria_update:
+    path: /admin/categoria/update/{id}
+    controller: App\Controller\Admin\CategoriaController::update
+admin_almacen_categoria_delete:
+    path: /admin/categoria/delete/{id}
+    controller: App\Controller\Admin\CategoriaController::delete
+
 admin_almacen_unidad_medida:
     path: /admin/unidadmedida
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\UnidadMedidaController::index
+admin_almacen_unidad_medida_create:
+    path: /admin/unidadmedida/create
+    controller: App\Controller\Admin\UnidadMedidaController::create
+admin_almacen_unidad_medida_update:
+    path: /admin/unidadmedida/update/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::update
+admin_almacen_unidad_medida_delete:
+    path: /admin/unidadmedida/delete/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::delete
+
 
 
 # Toda las rustas de sub menu compras
 admin_compra_ingreso:
     path: /admin/ingreso
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\UnidadMedidaController::index
+admin_compra_ingreso_create:
+    path: /admin/ingreso/create
+    controller: App\Controller\Admin\UnidadMedidaController::create
+admin_compra_ingreso_update:
+    path: /admin/ingreso/update/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::update
+admin_compra_ingreso_delete:
+    path: /admin/ingreso/delete/{id}
+    controller: App\Controller\Admin\UnidadMedidaController::delete
+
 admin_compra_proveedor:
     path: /admin/proveedor
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\ProveedorController::index
+admin_compra_proveedor_create:
+    path: /admin/proveedor/create
+    controller: App\Controller\Admin\ProveedorController::create
+admin_compra_proveedor_update:
+    path: /admin/proveedor/update/{id}
+    controller: App\Controller\Admin\ProveedorController::update
+admin_compra_proveedor_delete:
+    path: /admin/proveedor/delete/{id}
+    controller: App\Controller\Admin\ProveedorController::delete
+
 
 
 # Toda las rustas de sub menu ventas
 admin_venta_venta:
     path: /admin/venta
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\VentaController::index
+admin_venta_venta_create:
+    path: /admin/venta/create
+    controller: App\Controller\Admin\VentaController::create
+admin_venta_venta_update:
+    path: /admin/venta/update/{id}
+    controller: App\Controller\Admin\VentaController::update
+admin_venta_venta_delete:
+    path: /admin/venta/delete/{id}
+    controller: App\Controller\Admin\VentaController::delete
+
 admin_venta_pedido:
     path: /admin/pedido
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\PedidoController::index
+admin_venta_pedido_create:
+    path: /admin/pedido/create
+    controller: App\Controller\Admin\PedidoController::create
+admin_venta_pedido_update:
+    path: /admin/pedido/update/{id}
+    controller: App\Controller\Admin\PedidoController::update
+admin_venta_pedido_delete:
+    path: /admin/pedido/delete/{id}
+    controller: App\Controller\Admin\PedidoController::delete
+
 admin_venta_cliente:
     path: /admin/cliente
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\ClienteController::index
+admin_venta_cliente_create:
+    path: /admin/cliente/create
+    controller: App\Controller\Admin\ClienteController::create
+admin_venta_cliente_update:
+    path: /admin/cliente/update/{id}
+    controller: App\Controller\Admin\ClienteController::update
+admin_venta_cliente_delete:
+    path: /admin/cliente/delete/{id}
+    controller: App\Controller\Admin\ClienteController::delete
+
 admin_venta_credito:
     path: /admin/credito
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\CreditoController::index
+admin_venta_credito_create:
+    path: /admin/credito/create
+    controller: App\Controller\Admin\CreditoController::create
+admin_venta_credito_update:
+    path: /admin/credito/update/{id}
+    controller: App\Controller\Admin\CreditoController::update
+admin_venta_credito_delete:
+    path: /admin/credito/delete/{id}
+    controller: App\Controller\Admin\CreditoController::delete
+
 admin_venta_deuda_pendiente:
     path: /admin/deudapendiente
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\DeudaPendieContetroller::index
+admin_venta_deuda_pendiente_create:
+    path: /admin/deudapendiente/create
+    controller: App\Controller\Admin\DeudaPendieContetroller::create
+admin_venta_deuda_pendiente_update:
+    path: /admin/deudapendiente/update/{id}
+    controller: App\Controller\Admin\DeudaPendieContetroller::update
+admin_venta_deuda_pendiente_delete:
+    path: /admin/deudapendiente/delete/{id}
+    controller: App\Controller\Admin\DeudaPendieContetroller::delete
+
 admin_venta_conf_comprobante:
     path: /admin/confcomprobante
-    controller: App\Controller\Admin\UsuarioController::index
+    controller: App\Controller\Admin\ConfComprobanteContetroller::index
+admin_venta_conf_comprobante_create:
+    path: /admin/confcomprobante/create
+    controller: App\Controller\Admin\ConfComprobanteContetroller::create
+admin_venta_conf_comprobante_update:
+    path: /admin/confcomprobante/update/{id}
+    controller: App\Controller\Admin\ConfComprobanteContetroller::update
+admin_venta_conf_comprobante_delete:
+    path: /admin/confcomprobante/delete/{id}
+    controller: App\Controller\Admin\ConfComprobanteContetroller::delete

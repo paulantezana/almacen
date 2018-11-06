@@ -1,4 +1,53 @@
 {% extends 'admin.html.twig' %}
-{% block body %}
-    estamos en usuario
+{% block main %}
+    <div class="card">
+        <div class="card-body crud">
+            <div class="crud-header">
+                <a href="{{ path('admin_mantenimiento_usuario_create') }}">
+                    <button type="button" class="btn btn-primary">Nuevo</button>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Razón Social</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for usuario in usuarios %}
+                            <tr>
+                                <th>{{ usuario.getRazonSocial() }}</th>
+                                <td>{{ usuario.getTipoDocumento() }} {{ usuario.getNumeroDocumento() }}</td>
+                                <td>{{ usuario.getDireccion() }}</td>
+                                <td>{{ usuario.getEmail() }}</td>
+                                <td>{{ usuario.getLogo() }}</td>
+                                <td>
+                                    <a href="/admin/sucursal/update/{{usuario.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                    </a>
+                                    <a href="/admin/sucursal/delete/{{usuario.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 {% endblock %}

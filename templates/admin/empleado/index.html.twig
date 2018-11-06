@@ -1,0 +1,55 @@
+{% extends 'admin.html.twig' %}
+{% block main %}
+    <div class="card">
+        <div class="card-body crud">
+            <div class="crud-header">
+                <a href="{{ path('admin_mantenimiento_empleado_create') }}">
+                    <button type="button" class="btn btn-primary">Nuevo</button>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Login</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for empleado in empleados %}
+                            <tr>
+                                <th>{{ empleado.getApellidos() }}</th>
+                                <td>{{ empleado.getTipoDocumento() }} {{ empleado.getNumeroDocumento() }}</td>
+                                <td>{{ empleado.getEmail() }}</td>
+                                <td>{{ empleado.getTelefono() }}</td>
+                                <td>{{ empleado.getLogin() }}</td>
+                                <td>{{ empleado.getFoto() }}</td>
+                                <td>
+                                    <a href="/admin/empleado/update/{{empleado.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                    </a>
+                                    <a href="/admin/empleado/delete/{{empleado.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}

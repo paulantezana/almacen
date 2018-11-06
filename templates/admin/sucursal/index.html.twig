@@ -1,9 +1,9 @@
 {% extends 'admin.html.twig' %}
-{% block body %}
+{% block main %}
     <div class="card">
         <div class="card-body crud">
             <div class="crud-header">
-                <a href="{{ path('admin_mantenimiento_sucursal_add') }}">
+                <a href="{{ path('admin_mantenimiento_sucursal_create') }}">
                     <button type="button" class="btn btn-primary">Nuevo</button>
                 </a>
             </div>
@@ -29,8 +29,12 @@
                                 <td>{{ sucursal.getEmail() }}</td>
                                 <td>{{ sucursal.getLogo() }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary">Editar</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                                    <a href="/admin/sucursal/update/{{sucursal.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                    </a>
+                                    <a href="/admin/sucursal/delete/{{sucursal.getId()}}">
+                                        <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                                    </a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -41,8 +45,6 @@
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
                 </ul>
             </nav>
