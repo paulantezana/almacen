@@ -1,0 +1,155 @@
+{% extends 'admin/layout.twig' %}
+{% block stylesheets %}
+    <script src="/libraries/nprogress/nprogress.js"></script>
+    <link rel="stylesheet" href="/libraries/nprogress/nprogress.css">
+    <script src="/libraries/request.js"></script>
+{% endblock %}
+{% block main %}
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-center">
+                <a href="/admin/categoria/form">
+                    <button type="button" class="btn btn-primary bmd-btn-fab bmd-btn-fab-sm">
+                        <i class="material-icons">add</i>
+                    </button>
+                </a>
+            </div>
+            <hr>
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="show-limits">
+                                <span>Mostrar</span>
+                                <select id="limit" class="form-control">
+                                    <option>10</option>
+                                    <option>30</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                </select>
+                                <span>Registros</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <h2 class="text-center">Listar <strong>Categorias</strong> </h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="search" id="search" class="form-control" placeholder="Buscar...">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>   
+            </div>
+            <div id="pagination" class="d-flex justify-content-between"></div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        ¿Esta seguro de eliminar este registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteConfirm">Si</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        // variable que almacena temporalmente el texto buscado en la base de datos
+        let currentSearchText = '';
+        let currentLimitTable = 10;
+
+        // Ejecucion de la Peticion ajax hacia el servidor
+        function executeRequest(current_page = 1){
+            customFetch('/admin/json/categoria',{
+                method: 'POST',
+                body: {
+                    search: currentSearchText,
+                    current_page: parseInt(current_page),
+                    limit: parseInt(currentLimitTable),
+                }
+            })
+            .then(e=>{
+                render(e.data, e.total, e.current_page, e.limit);
+            });
+        }
+
+        // Rederizando el contenido HTML
+        function render(data, total, current_page, limit){
+            // get element tbody table
+            let table = document.getElementById('tbody');
+            let content = '';
+            
+            // construct rows in table
+            data.map((item,key)=>{
+                content +=
+                `<tr>
+                    <td>${item.nombre}</td>
+                    <td>
+                        <a href="/admin/categoria/form?id=${item.id}" class="btn-group-sm">
+                            <button type="button" class="btn btn-primary bmd-btn-icon">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </a>
+                        <span class="btn-group-sm" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
+                            <button type="button" class="btn btn-danger bmd-btn-icon">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </span>
+                    </td>
+                </tr>`
+            });
+            
+            // render in tbody
+            table.innerHTML = content;
+
+            // render pagination
+            pagination(total, (key) => executeRequest(key,limit), limit, current_page);
+        }
+
+
+        executeRequest(1);
+
+        // Buscador
+        let categoria = document.getElementById('search');
+        categoria.addEventListener('keyup',function(e){
+            currentSearchText = e.target.value; 
+            executeRequest(1);
+        });
+
+        // Limite de páginas
+        let limitSelect = document.getElementById('limit');
+        limitSelect.addEventListener('change',()=>{
+            currentLimitTable = limitSelect.options[limitSelect.options.selectedIndex].textContent;
+            executeRequest(1);
+        });
+
+        // Delete
+        function currentRowDelete(id){
+            let confirm = document.getElementById('deleteConfirm');
+            confirm.addEventListener('click',function(){
+                customFetch('/admin/categoria/delete',{
+                    body: { id },
+                    method: 'DELETE',
+                })
+                    .then(e=>{
+                        executeRequest(1);
+                    });
+            });
+        }
+        
+    </script>
+{% endblock %}

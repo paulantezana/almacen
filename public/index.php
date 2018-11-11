@@ -1,39 +1,45 @@
 <?php
+    require_once __DIR__ . '/../config/app.php';
+    use App\Libraries\Router;
 
-use App\Kernel;
-use Symfony\Component\Debug\Debug;
-use Symfony\Component\Dotenv\Dotenv;
-use Symfony\Component\HttpFoundation\Request;
+    session_start();
 
-require __DIR__.'/../vendor/autoload.php';
+    // conprobando si el url inicia con  === admin 
+    $isAdmin = fnmatch("[admin]*",$_GET['url'] ?? false);
 
-// The check is to ensure we don't use .env in production
-if (!isset($_SERVER['APP_ENV']) && !isset($_ENV['APP_ENV'])) {
-    if (!class_exists(Dotenv::class)) {
-        throw new \RuntimeException('APP_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.');
+    // verificando si esta tratando de ingresar al dashboard para
+    // administrar el sistema
+    if($isAdmin){
+        // Get public routes
+        $url = PUBLIC_ROUTES[$_GET['url'] ?? ''] ?? false;
+        if($url){
+            // Rutas publicas del admin
+            Router::any($url['controller'],$url['action']);
+        }else{
+            // Verificando la session
+            if(isset($_SESSION['user'])){
+                // Get secret urls
+                $url = ROUTERS[$_GET['url'] ?? ''] ?? false;
+                if($url){
+                    // Toda las rutas del admin
+                    Router::any($url['controller'],$url['action']);
+                }else{
+                    // Pagina 404 no encontrada
+                    Router::any('Page','E404');
+                }
+            }else{
+                // Session login new user
+                header('location:/admin/user/login');
+            }
+        }
+    };
+
+
+    if(!$isAdmin){
+        $url = PUBLICROUTER[$_GET['url'] ?? ''] ?? false;
+        if($url){
+            Router::any($url['controller'],$url['action']);
+        }else{
+            header('location:/');
+        }
     }
-    (new Dotenv())->load(__DIR__.'/../.env');
-}
-
-$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? 'dev';
-$debug = (bool) ($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? ('prod' !== $env));
-
-if ($debug) {
-    umask(0000);
-
-    Debug::enable();
-}
-
-if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {
-    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
-}
-
-if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false) {
-    Request::setTrustedHosts(explode(',', $trustedHosts));
-}
-
-$kernel = new Kernel($env, $debug);
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);

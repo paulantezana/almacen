@@ -1,0 +1,27 @@
+{% extends 'web/layout.twig' %}
+{% block main %}
+    {# <div class="sn-container startproduct">
+        <div class="sn-item l-50"><img src="/static/about.png" alt="about" /></div>
+        <div class="sn-item l-50">
+            <article>
+                <h2>Drink Our Coffee & Tea Store</h2>
+                <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p><a class="button" href="">lee mas</a></article>
+        </div>
+    </div> #}
+    <div class="sn-container">
+        <div class="sn-item">
+            {% include 'web/block/product.twig' %}
+        </div>
+    </div>
+    <div class="sn-container sub-banner">
+        <div class="sn-item m-50">
+            <div class="sub-banner__item"><img src="/static/subbanner-01.jpg" alt="banner" /></div>
+        </div>
+        <div class="sn-item m-50">
+            <div class="sub-banner__item"><img src="/static/subbanner-02.jpg" alt="banner" /></div>
+        </div>
+    </div>
+    {% include 'web/block/testimonial.twig' %}
+    {% include 'web/block/services.twig' %}
+    {% include 'web/block/topcategories.twig' %}
+{% endblock %}

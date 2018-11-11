@@ -1,0 +1,21 @@
+<div class="products grid-template">
+    {% for item in 1..12 %}
+        <article class="product">
+            <div class="product__img">
+                <div class="product__images">
+                    <img src="/static/114-home_default.jpg" alt="product" />
+                    <img src="/static/115-home_default.jpg" alt="product" />
+                </div>
+                <ul class="product__actions">
+                    <li class="icon-basket"></li>
+                    <li class="icon-heart-o"></li>
+                    <li class="icon-eye"></li>
+                </ul>
+            </div>
+            <div class="product__des">
+                <div class="product__title"><a href="">voluptate velit...</a></div>
+                <div class="product__price">36,60 $</div>
+            </div>
+        </article>
+    {% endfor %}
+</div>

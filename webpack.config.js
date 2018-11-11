@@ -1,49 +1,56 @@
-var Encore = require('@symfony/webpack-encore');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-Encore
-    // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
-    // public path used by the web server to access the output path
-    .setPublicPath('/build')
-    // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('build/')
+const path = require('path');
 
-    /*
-     * ENTRY CONFIG
-     *
-     * Add 1 entry for each "page" of your app
-     * (including one that's included on every page - e.g. "app")
-     *
-     * Each entry will result in one JavaScript file (e.g. app.js)
-     * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
-     */
-    .addEntry('app', './assets/js/site.js')
-    .addEntry('admin', './assets/js/admin.js')
-    //.addEntry('page2', './assets/js/page2.js')
-
-    /*
-     * FEATURE CONFIG
-     *
-     * Enable & configure other features below. For a full
-     * list of features, see:
-     * https://symfony.com/doc/current/frontend.html#adding-more-features
-     */
-    .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
-
-    // enables Sass/SCSS support
-    .enableSassLoader()
-
-    .enablePostCssLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
-;
-
-module.exports = Encore.getWebpackConfig();
+module.exports = {
+    entry: {
+        admin: './src/admin/index.js',
+        web: './src/web/index.js',
+    },
+    output: {
+        path: path.resolve(__dirname, 'public/assets'),
+        filename: '[name].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            minimize: true,
+                            sourceMap: true,
+                        }   
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+                })
+            },
+            { 
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "babel-loader" 
+            }
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin({
+            filename:  (getPath) => {
+                return getPath('[name].css').replace('css/js', 'css');
+            },
+            allChunks: true
+        })
+    ]
+};
