@@ -8,10 +8,10 @@
     <div class="card">
         <div class="card-header card-header-primary d-flex justify-content-between">
             <div>
-                <h4 class="card-title">Listar <strong>Sucursales</strong></h4>
-                <p class="card-category">listado de todo los sucursales</p>
+                <h4 class="card-title">Listar <strong>empleadoes</strong></h4>
+                <p class="card-category">listado de todo los empleadoes</p>
             </div>
-            <a href="/admin/sucursal/form">
+            <a href="/admin/empleado/form">
                 <button type="button" class="btn btn-secondary">
                     <i class="material-icons">add</i>
                 </button>
@@ -74,7 +74,7 @@
 
         // Ejecucion de la Peticion ajax hacia el servidor
         function executeRequest(current_page = 1){
-            customFetch('/admin/json/sucursal',{
+            customFetch('/admin/json/empleado',{
                 method: 'POST',
                 body: {
                     search: currentSearchText,
@@ -103,7 +103,7 @@
                     <td>${item.telefono}</td>
                     <td>${item.logo}</td>
                     <td>
-                        <a href="/admin/sucursal/form?id=${item.id}" class="ml-3 mr-3">
+                        <a href="/admin/empleado/form?id=${item.id}" class="ml-3 mr-3">
                             <i class="material-icons">edit</i>
                         </a>
                         <a href="" class="ml-3 mr-3 text-danger" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
@@ -124,8 +124,8 @@
         executeRequest(1);
 
         // Buscador
-        let sucursal = document.getElementById('search');
-        sucursal.addEventListener('keyup',function(e){
+        let empleado = document.getElementById('search');
+        empleado.addEventListener('keyup',function(e){
             currentSearchText = e.target.value; 
             executeRequest(1);
         });
@@ -141,7 +141,7 @@
         function currentRowDelete(id){
             let confirm = document.getElementById('deleteConfirm');
             confirm.addEventListener('click',function(){
-                customFetch('/admin/sucursal/delete',{
+                customFetch('/admin/empleado/delete',{
                     body: { id },
                     method: 'DELETE',
                 })

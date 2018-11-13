@@ -2,59 +2,59 @@
 {% block main %}
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">{{ type == 'create' ? 'Nuevo' : 'Editar' }} Sucursal</h4>
+            <h4 class="card-title">{{ type == 'create' ? 'Nuevo' : 'Editar' }} empleado</h4>
             <p class="card-category">Complete los campos</p>
         </div>
         <div class="card-body">
-            <form action="/admin/sucursal/{{ type }}" method="POST">
-                {% if sucursal.id %}
+            <form action="/admin/empleado/{{ type }}" method="POST">
+                {% if empleado.id %}
                     <div style="display:none">
                         <label for="id">id:</label>
-                        <input type="text" value="{{ sucursal.id }}" class="form-control" id="id" name="id">
+                        <input type="text" value="{{ empleado.id }}" class="form-control" id="id" name="id">
                     </div>
                 {% endif %}
                 <div class="form-group">
                     <label for="razon_social" class="bmd-label-floating">Razón Social (*):</label>
-                    <input type="text" value="{{ sucursal.razon_social}}" class="form-control" id="razon_social" name="razon_social">
+                    <input type="text" value="{{ empleado.razon_social}}" class="form-control" id="razon_social" name="razon_social">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="tipo_documento" class="bmd-label-floating">Tipo Documento (*):</label>
-                        <input type="text" value="{{ sucursal.tipo_documento}}" class="form-control" id="tipo_documento" name="tipo_documento">
+                        <input type="text" value="{{ empleado.tipo_documento}}" class="form-control" id="tipo_documento" name="tipo_documento">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="numero_documento" class="bmd-label-floating">Documento (*):</label>
-                        <input type="text" value="{{ sucursal.numero_documento}}" class="form-control" id="numero_documento" name="numero_documento">
+                        <input type="text" value="{{ empleado.numero_documento}}" class="form-control" id="numero_documento" name="numero_documento">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="direccion" class="bmd-label-floating">Dirección (*):</label>
-                        <input type="text" value="{{ sucursal.direccion}}" class="form-control" id="direccion" name="direccion">
+                        <input type="text" value="{{ empleado.direccion}}" class="form-control" id="direccion" name="direccion">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="telefono" class="bmd-label-floating">Teléfono (*):</label>
-                        <input type="text" value="{{ sucursal.telefono}}" class="form-control" id="telefono" name="telefono">
+                        <input type="text" value="{{ empleado.telefono}}" class="form-control" id="telefono" name="telefono">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="email" class="bmd-label-floating">Email:</label>
-                        <input type="text" value="{{ sucursal.email}}" class="form-control" id="email" name="email">
+                        <input type="text" value="{{ empleado.email}}" class="form-control" id="email" name="email">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="representante" class="bmd-label-floating">Representante:</label>
-                        <input type="text" value="{{ sucursal.representante}}" class="form-control" id="representante" name="representante">
+                        <input type="text" value="{{ empleado.representante}}" class="form-control" id="representante" name="representante">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="logo" class="bmd-label-floating">Logo:</label>
-                        <input type="text" value="{{ sucursal.logo}}" class="form-control" id="logo" name="logo">
+                        <input type="text" value="{{ empleado.logo}}" class="form-control" id="logo" name="logo">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" name="estado" type="checkbox" {{ sucursal.estado ? 'checked': '' }}>
+                            <input class="form-check-input" name="estado" type="checkbox" {{ empleado.estado ? 'checked': '' }}>
                             Estado
                             <span class="form-check-sign">
                             <span class="check"></span>
