@@ -1,0 +1,30 @@
+{% extends 'admin/layout.twig' %}
+{% block main %}
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title">{{ type == 'create' ? 'Nuevo' : 'Editar' }} tipodocumento</h4>
+            <p class="card-category">Complete los campos</p>
+        </div>
+        <div class="card-body">
+            <form action="/admin/tipodocumento/{{ type }}" method="POST">
+                {% if tipodocumento.id %}
+                    <div style="display:none">
+                        <label for="id">id:</label>
+                        <input type="text" value="{{ tipodocumento.id }}" class="form-control" id="id" name="id">
+                    </div>
+                {% endif %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombre" class="bmd-label-floating">Documento (*):</label>
+                        <input type="text" value="{{ tipodocumento.nombre}}" class="form-control" id="nombre" name="nombre">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="operacion" class="bmd-label-floating">Operacion (*):</label>
+                        <input type="text" value="{{ tipodocumento.operacion}}" class="form-control" id="operacion" name="operacion">
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-raised btn-primary" value="{{ type == 'create' ? 'Guardar' : 'Guardar Cambios' }}" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -6,48 +6,45 @@
 {% endblock %}
 {% block main %}
     <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-center">
-                <a href="/admin/categoria/form">
-                    <button type="button" class="btn btn-primary bmd-btn-fab bmd-btn-fab-sm">
-                        <i class="material-icons">add</i>
-                    </button>
-                </a>
+        <div class="card-header card-header-primary d-flex justify-content-between">
+            <div>
+                <h4 class="card-title">Listar <strong>categoriaes</strong></h4>
+                <p class="card-category">listado de todo los categoriaes</p>
             </div>
-            <hr>
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="show-limits">
-                                <span>Mostrar</span>
-                                <select id="limit" class="form-control">
-                                    <option>10</option>
-                                    <option>30</option>
-                                    <option>50</option>
-                                    <option>100</option>
-                                </select>
-                                <span>Registros</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <h2 class="text-center">Listar <strong>Categorias</strong> </h2>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="search" id="search" class="form-control" placeholder="Buscar...">
-                        </div>
-                    </div>
+            <a href="/admin/categoria/form">
+                <button type="button" class="btn btn-secondary">
+                    <i class="material-icons">add</i>
+                </button>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3 d-flex justify-content-between">
+                <div class="col-sm-6 d-flex justify-content-start align-items-center">
+                    <span>Mostrar</span>
+                    <select id="limit" class="form-control mr-2 ml-2" style="width:2rem">
+                        <option>10</option>
+                        <option>30</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <span>Registros</span>
                 </div>
-                <table class="table table-bordered table-hover">
-                    <thead>
+                <div class="col-sm-6 col-lg-3">
+                    <input type="search" id="search" class="form-control" placeholder="Buscar...">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class=" text-primary">
                         <tr>
-                            <th>Nombre</th>
-                            <th>Opciones</th>
+                            <th>Categoria</th>               
+                            <th>Estado</th>
+                            <th style="width:150px">Opciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
                     </tbody>
-                </table>   
+                </table>
             </div>
             <div id="pagination" class="d-flex justify-content-between"></div>
         </div>
@@ -98,17 +95,14 @@
                 content +=
                 `<tr>
                     <td>${item.nombre}</td>
+                    <td>${item.estado}</td>
                     <td>
-                        <a href="/admin/categoria/form?id=${item.id}" class="btn-group-sm">
-                            <button type="button" class="btn btn-primary bmd-btn-icon">
-                                <i class="material-icons">edit</i>
-                            </button>
+                        <a href="/admin/categoria/form?id=${item.id}" class="ml-3 mr-3">
+                            <i class="material-icons">edit</i>
                         </a>
-                        <span class="btn-group-sm" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
-                            <button type="button" class="btn btn-danger bmd-btn-icon">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </span>
+                        <a href="" class="ml-3 mr-3 text-danger" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </td>
                 </tr>`
             });

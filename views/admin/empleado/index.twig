@@ -8,10 +8,10 @@
     <div class="card">
         <div class="card-header card-header-primary d-flex justify-content-between">
             <div>
-                <h4 class="card-title">Listar <strong>unidadmedidaes</strong></h4>
-                <p class="card-category">listado de todo los unidadmedidaes</p>
+                <h4 class="card-title">Listar <strong>Sucursales</strong></h4>
+                <p class="card-category">listado de todo los sucursales</p>
             </div>
-            <a href="/admin/unidadmedida/form">
+            <a href="/admin/sucursal/form">
                 <button type="button" class="btn btn-secondary">
                     <i class="material-icons">add</i>
                 </button>
@@ -37,9 +37,12 @@
                 <table class="table table-hover">
                     <thead class=" text-primary">
                         <tr>
-                            <th>Unidad Medida</th>
-                            <th>Prefijo</th>
-                            <th style="width:150px">Opciones</th>
+                            <th>Razón Social</th>
+                            <th>Documento</th>
+                            <th>Dirección</th>
+                            <th>Email</th>               
+                            <th>Logo</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -71,7 +74,7 @@
 
         // Ejecucion de la Peticion ajax hacia el servidor
         function executeRequest(current_page = 1){
-            customFetch('/admin/json/unidadmedida',{
+            customFetch('/admin/json/sucursal',{
                 method: 'POST',
                 body: {
                     search: currentSearchText,
@@ -94,10 +97,13 @@
             data.map((item,key)=>{
                 content +=
                 `<tr>
-                    <td>${item.nombre}</td>
-                    <td>${item.prefijo}</td>
+                    <td>${item.razon_social}</td>
+                    <td>${item.tipo_documento} ${item.numero_documento}</td>
+                    <td>${item.email}</td>
+                    <td>${item.telefono}</td>
+                    <td>${item.logo}</td>
                     <td>
-                        <a href="/admin/unidadmedida/form?id=${item.id}" class="ml-3 mr-3">
+                        <a href="/admin/sucursal/form?id=${item.id}" class="ml-3 mr-3">
                             <i class="material-icons">edit</i>
                         </a>
                         <a href="" class="ml-3 mr-3 text-danger" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
@@ -118,8 +124,8 @@
         executeRequest(1);
 
         // Buscador
-        let unidadmedida = document.getElementById('search');
-        unidadmedida.addEventListener('keyup',function(e){
+        let sucursal = document.getElementById('search');
+        sucursal.addEventListener('keyup',function(e){
             currentSearchText = e.target.value; 
             executeRequest(1);
         });
@@ -135,7 +141,7 @@
         function currentRowDelete(id){
             let confirm = document.getElementById('deleteConfirm');
             confirm.addEventListener('click',function(){
-                customFetch('/admin/unidadmedida/delete',{
+                customFetch('/admin/sucursal/delete',{
                     body: { id },
                     method: 'DELETE',
                 })

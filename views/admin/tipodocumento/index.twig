@@ -8,10 +8,10 @@
     <div class="card">
         <div class="card-header card-header-primary d-flex justify-content-between">
             <div>
-                <h4 class="card-title">Listar <strong>unidadmedidaes</strong></h4>
-                <p class="card-category">listado de todo los unidadmedidaes</p>
+                <h4 class="card-title">Listar <strong>tipodocumentoes</strong></h4>
+                <p class="card-category">listado de todo los tipodocumentoes</p>
             </div>
-            <a href="/admin/unidadmedida/form">
+            <a href="/admin/tipodocumento/form">
                 <button type="button" class="btn btn-secondary">
                     <i class="material-icons">add</i>
                 </button>
@@ -37,8 +37,8 @@
                 <table class="table table-hover">
                     <thead class=" text-primary">
                         <tr>
-                            <th>Unidad Medida</th>
-                            <th>Prefijo</th>
+                            <th>Nombre</th>
+                            <th>Operacion</th>
                             <th style="width:150px">Opciones</th>
                         </tr>
                     </thead>
@@ -71,7 +71,7 @@
 
         // Ejecucion de la Peticion ajax hacia el servidor
         function executeRequest(current_page = 1){
-            customFetch('/admin/json/unidadmedida',{
+            customFetch('/admin/json/tipodocumento',{
                 method: 'POST',
                 body: {
                     search: currentSearchText,
@@ -95,9 +95,9 @@
                 content +=
                 `<tr>
                     <td>${item.nombre}</td>
-                    <td>${item.prefijo}</td>
+                    <td>${item.operacion}</td>
                     <td>
-                        <a href="/admin/unidadmedida/form?id=${item.id}" class="ml-3 mr-3">
+                        <a href="/admin/tipodocumento/form?id=${item.id}" class="ml-3 mr-3">
                             <i class="material-icons">edit</i>
                         </a>
                         <a href="" class="ml-3 mr-3 text-danger" onclick="currentRowDelete(${item.id})" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal">
@@ -118,8 +118,8 @@
         executeRequest(1);
 
         // Buscador
-        let unidadmedida = document.getElementById('search');
-        unidadmedida.addEventListener('keyup',function(e){
+        let tipodocumento = document.getElementById('search');
+        tipodocumento.addEventListener('keyup',function(e){
             currentSearchText = e.target.value; 
             executeRequest(1);
         });
@@ -135,7 +135,7 @@
         function currentRowDelete(id){
             let confirm = document.getElementById('deleteConfirm');
             confirm.addEventListener('click',function(){
-                customFetch('/admin/unidadmedida/delete',{
+                customFetch('/admin/tipodocumento/delete',{
                     body: { id },
                     method: 'DELETE',
                 })

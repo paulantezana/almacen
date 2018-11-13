@@ -30,12 +30,12 @@
             $consult = new Consult();
 
             // obteniendo el numero total de los registros en la base de datos
-            $total = $consult -> query('SELECT * FROM  tipodocumentos  WHERE razon_social LIKE :search',[
+            $total = $consult -> query('SELECT * FROM  tipodocumentos  WHERE nombre LIKE :search',[
                 ':search'       => '%' . $request->search . '%',
             ])->rowCount();
 
             // Realizando la consulta con la paginacion
-            $tipodocumentos = $consult -> query("SELECT * FROM  tipodocumentos WHERE razon_social LIKE :search ORDER BY id DESC LIMIT {$offset}, {$request->limit}",[
+            $tipodocumentos = $consult -> query("SELECT * FROM  tipodocumentos WHERE nombre LIKE :search ORDER BY id DESC LIMIT {$offset}, {$request->limit}",[
                 ':search'       => '%' . $request->search . '%',
             ])->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -77,18 +77,11 @@
         public function create(){
             $consult = new Consult();
             $consult -> query(
-                'INSERT INTO tipodocumentos (razon_social,tipo_documento,numero_documento,direccion,telefono,email,representante,logo,estado)
-                VALUES(:razon_social,:tipo_documento,:numero_documento,:direccion,:telefono,:email,:representante,:logo,:estado)',
+                'INSERT INTO tipodocumentos (nombre,operacion)
+                VALUES(:nombre,:operacion)',
                 [
-                    ':razon_social'       => $_POST['razon_social'],
-                    ':tipo_documento'       => $_POST['tipo_documento'],
-                    ':numero_documento'       => $_POST['numero_documento'],
-                    ':direccion'       => $_POST['direccion'],
-                    ':telefono'       => $_POST['telefono'],
-                    ':email'       => $_POST['email'],
-                    ':representante'       => $_POST['representante'],
-                    ':logo'       => $_POST['logo'],
-                    ':estado'       => $_POST['estado']
+                    ':nombre'       => $_POST['nombre'],
+                    ':operacion'       => $_POST['operacion']
                 ]
             );
             header('location:/admin/tipodocumento');
@@ -97,19 +90,11 @@
             $consult = new Consult();
             $consult -> query(
                 'UPDATE tipodocumentos SET 
-                    razon_social=:razon_social,tipo_documento=:tipo_documento,numero_documento=:numero_documento,
-                    direccion=:direccion,telefono=:telefono,email=:email,representante=:representante,logo=:logo,estado=:estado
+                    nombre=:nombre,operacion=:operacion
                     WHERE id=:id',
                 [
-                    ':razon_social'       => $_POST['razon_social'],
-                    ':tipo_documento'       => $_POST['tipo_documento'],
-                    ':numero_documento'       => $_POST['numero_documento'],
-                    ':direccion'       => $_POST['direccion'],
-                    ':telefono'       => $_POST['telefono'],
-                    ':email'       => $_POST['email'],
-                    ':representante'       => $_POST['representante'],
-                    ':logo'       => $_POST['logo'],
-                    ':estado'       => $_POST['estado'],
+                    ':nombre'       => $_POST['nombre'],
+                    ':operacion'       => $_POST['operacion'],
                     ':id'       => $_POST['id'],
                 ]
             );

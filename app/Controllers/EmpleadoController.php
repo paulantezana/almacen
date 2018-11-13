@@ -30,12 +30,12 @@
             $consult = new Consult();
 
             // obteniendo el numero total de los registros en la base de datos
-            $total = $consult -> query('SELECT * FROM  empleados  WHERE razon_social LIKE :search',[
+            $total = $consult -> query('SELECT * FROM  empleados  WHERE apellidos LIKE :search',[
                 ':search'       => '%' . $request->search . '%',
             ])->rowCount();
 
             // Realizando la consulta con la paginacion
-            $empleados = $consult -> query("SELECT * FROM  empleados WHERE razon_social LIKE :search ORDER BY id DESC LIMIT {$offset}, {$request->limit}",[
+            $empleados = $consult -> query("SELECT * FROM  empleados WHERE apellidos LIKE :search ORDER BY id DESC LIMIT {$offset}, {$request->limit}",[
                 ':search'       => '%' . $request->search . '%',
             ])->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -77,10 +77,10 @@
         public function create(){
             $consult = new Consult();
             $consult -> query(
-                'INSERT INTO empleados (razon_social,tipo_documento,numero_documento,direccion,telefono,email,representante,logo,estado)
-                VALUES(:razon_social,:tipo_documento,:numero_documento,:direccion,:telefono,:email,:representante,:logo,:estado)',
+                'INSERT INTO empleados (apellidos,tipo_documento,numero_documento,direccion,telefono,email,representante,logo,estado)
+                VALUES(:apellidos,:tipo_documento,:numero_documento,:direccion,:telefono,:email,:representante,:logo,:estado)',
                 [
-                    ':razon_social'       => $_POST['razon_social'],
+                    ':apellidos'       => $_POST['apellidos'],
                     ':tipo_documento'       => $_POST['tipo_documento'],
                     ':numero_documento'       => $_POST['numero_documento'],
                     ':direccion'       => $_POST['direccion'],
@@ -97,11 +97,11 @@
             $consult = new Consult();
             $consult -> query(
                 'UPDATE empleados SET 
-                    razon_social=:razon_social,tipo_documento=:tipo_documento,numero_documento=:numero_documento,
+                    apellidos=:apellidos,tipo_documento=:tipo_documento,numero_documento=:numero_documento,
                     direccion=:direccion,telefono=:telefono,email=:email,representante=:representante,logo=:logo,estado=:estado
                     WHERE id=:id',
                 [
-                    ':razon_social'       => $_POST['razon_social'],
+                    ':apellidos'       => $_POST['apellidos'],
                     ':tipo_documento'       => $_POST['tipo_documento'],
                     ':numero_documento'       => $_POST['numero_documento'],
                     ':direccion'       => $_POST['direccion'],
