@@ -20,7 +20,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="tipo_documento" class="bmd-label-floating">Tipo Documento (*):</label>
-                        <input type="text" value="{{ sucursal.tipo_documento}}" class="form-control" id="tipo_documento" name="tipo_documento">
+                        <select class="custom-select" id="tipo_documento" name="tipo_documento">
+                            {% for tipodocumento in tipodocumentos %}
+                                {% if sucursal.tipo_documento == tipodocumento.nombre %}
+                                    <option value={{tipodocumento.nombre}} selected>{{tipodocumento.nombre}}</option>
+                                {% else %}
+                                    <option value={{tipodocumento.nombre}}>{{tipodocumento.nombre}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="numero_documento" class="bmd-label-floating">Documento (*):</label>

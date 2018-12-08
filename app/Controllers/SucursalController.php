@@ -55,10 +55,11 @@
         public function form(){
             $sucursal;
             
+            // coneccion
+            $consult = new Consult();
+
             // Si se envia in parametro id por el metodo get buscara los datos en la base de datos
             if(isset($_GET['id'])){
-                // coneccion
-                $consult = new Consult();
                 // consulta
                 $result = $consult -> query(
                     'SELECT * FROM  sucursales WHERE id=:id', [':id'   => $_GET['id']]
@@ -68,9 +69,13 @@
                 }
             }
 
+            // Get tipo documento
+            $tipodocumentos = $consult -> query('SELECT * FROM  tipodocumentos');
+
             // redireccionamiento
             echo $this->view->render('admin/sucursal/form.twig',[
                 'sucursal' => $sucursal,
+                'tipodocumentos' => $tipodocumentos,
                 'type'=> isset($_GET['id']) ? 'update' : 'create'
             ]);
         }
